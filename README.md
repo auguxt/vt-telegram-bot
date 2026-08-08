@@ -1,144 +1,147 @@
-# 🦠 VirusTotal Telegram Bot
+# VirusTotal Telegram Bot 🦠
 
-<div align="center">
+A Telegram bot that scans URLs, files, hashes and IPs
+using the VirusTotal API.
 
-🎬 **Breaking Bad–Themed Malware Scanner Bot**  
-Saul prepares → Walter cooks → Results reveal 🔬
+Breaking Bad themed. *I am the one who scans.*
 
-A Telegram bot that scans **files, URLs, and hashes** using the VirusTotal API.
-
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-</div>
+> ⚠️ For personal and educational use only.
 
 ---
 
-## ✨ Features
+## What's Inside
 
-- 🔍 **Hash Lookup** — MD5, SHA1, SHA256
-- 🔗 **URL Analysis** — Detect malware & phishing
-- 📁 **File Scanning** — Upload files up to 32MB
-- 🎬 **Breaking Bad GIF Flow**
-  - Saul: “Getting ready…”
-  - Walter: “Let him cook…”
-  - Final result reveal
-- ⚡ **Async & Fast** — Built with Pyrogram + aiohttp
-- 🔐 Secure environment variable handling
+```
+vt-telegram-bot/
+│
+├── bot.py
+├── .env.example
+├── requirements.txt
+├── README.md
+├── LICENSE
+└── .gitignore
+```
 
 ---
 
-## 🚀 Quick Start
+## What It Can Scan
 
-### 1️⃣ Clone the Repository
+| Send this | Example |
+|-----------|---------|
+| URL | `https://example.com` |
+| MD5 hash | `d41d8cd98f00b204e9800998ecf8427e` |
+| SHA1 hash | `da39a3ee5e6b4b0d3255bfef95601890` |
+| SHA256 hash | `e3b0c44298fc1c149afb...` |
+| IP address | `1.2.3.4` |
+| File | Upload any file up to 32MB |
+
+---
+
+## What You Get Back
+
+```
+🚨 Malicious:   3
+⚠️  Suspicious:  1
+✅ Harmless:    65
+❓ Undetected:  4
+
+💀 Risk Score: 🔴 [████░░░░░░] 72/100
+
+🔍 Flagged by:
+  🔴 Kaspersky: malware
+  🔴 BitDefender: trojan
+```
+
+---
+
+## Commands
+
+```
+/start      — Welcome screen
+/help       — How to use the bot
+/stats      — Your scan history stats
+/history    — Last 5 scans
+/report     — Your personal threat report
+/watch      — Monitor a URL or IP daily
+/watchlist  — See what you are watching
+/unwatch    — Stop monitoring something
+```
+
+---
+
+## Setup
+
+### 1. Get your API keys
+
+| Key | Where to get it |
+|-----|----------------|
+| `VT_API_KEY` | https://virustotal.com |
+| `TELEGRAM_TOKEN` | @BotFather on Telegram |
+
+### 2. Clone and install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/vt-telegram-bot.git
+git clone https://github.com/auguxt/vt-telegram-bot.git
 cd vt-telegram-bot
-2️⃣ Install Dependencies
 pip install -r requirements.txt
-3️⃣ Configure Environment Variables
+```
+
+### 3. Set up your keys
+
+```bash
 cp .env.example .env
 nano .env
+```
 
-Fill in your keys:
+Fill in:
+```
+VT_API_KEY=your_key_here
+TELEGRAM_TOKEN=your_token_here
+```
 
-Variable	Description	Where to Get
-VT_API_KEY	VirusTotal API key	https://virustotal.com
+### 4. Run
 
-TELEGRAM_TOKEN	Bot token	@BotFather
-TELEGRAM_API_ID	Telegram API ID	https://my.telegram.org
+```bash
+python bot.py
+```
 
-TELEGRAM_API_HASH	Telegram API Hash	https://my.telegram.org
+---
 
-⚠️ Never commit your .env file.
+## Example Output
 
-4️⃣ Run the Bot
-python3 app.py
+**Safe URL:**
+```
+✅ Yeah science, bitch! It's clean!
+Risk Score: 🟢 [░░░░░░░░░░] 0/100
+Zero out of 80 engines raised an alarm.
+```
 
-Your bot is now live 🚀
+**Dangerous URL:**
+```
+☣️ I AM the danger. And THIS is the danger.
+Risk Score: 🔴 [████████░░] 85/100
+Flagged by: Kaspersky, BitDefender, ESET
+```
 
-📖 Usage
+---
 
-Send any of the following to your bot:
+## ⚠️ Important
 
-Input Type	Example
-Hash	d41d8cd98f00b204e9800998ecf8427e
-URL	https://example.com
-File	Upload file (≤32MB)
-Command	/start
-🎬 How It Works
-User sends URL / File / Hash
-        ↓
-📸 Saul GIF — "Getting ready..."
-        ↓
-🔥 Walter GIF — "Let him cook..."
-        ↓
-🟢 Safe
-🟡 Suspicious
-🔴 Dangerous
-📂 Project Structure
-vt-telegram-bot/
-├── app.py              # Main bot logic
-├── requirements.txt    # Dependencies
-├── .env.example        # Environment template
-├── .gitignore          # Git ignore rules
-├── README.md           # Documentation
-└── LICENSE             # MIT License
-⚠️ Important Notes
+- Free VirusTotal API = 4 requests per minute
+- Never commit your `.env` file
+- Never commit `.session` files — they contain your tokens
+- Max file size = 32MB
 
-❌ Max file size: 32MB (VirusTotal limit)
+---
 
-⏱ Free API rate limit: 4 requests/minute
+## Requirements
 
-🔐 Never commit .env
+- Python 3.8+
+- VirusTotal API key (free)
+- Telegram Bot token
 
-🗑 Files are not stored permanently
+---
 
-🛠 Troubleshooting
-Issue	Fix
-Missing environment variables	Check .env file
-Invalid bot token	Regenerate from @BotFather
-Rate limit exceeded	Wait a few minutes
-Hash not found	Upload the actual file
-📦 Dependencies
-pyrogram>=2.0.106
-aiohttp>=3.9.0
-python-dotenv>=1.0.0
-TgCrypto>=1.2.5
-🤝 Contributing
+## License
 
-Fork the repository
-
-Create a new branch
-
-git checkout -b feature/amazing-feature
-
-Commit your changes
-
-git commit -m "✨ Add amazing feature"
-
-Push
-
-git push origin feature/amazing-feature
-
-Open a Pull Request
-
-📜 License
-
-MIT License — see the LICENSE file for details.
-
-⚠️ Disclaimer
-
-This project is for educational and legitimate security purposes only.
-The developers are not responsible for misuse.
-
-<div align="center">
-
-🧠 Concept & Prompt Engineering by Syed Sameer
-🤖 Developed with AI assistance
-🛡 Powered by VirusTotal API
-
-⭐ Star this repo if you found it useful!
-
-</div> ```
+MIT — see [LICENSE](LICENSE)
