@@ -1,5 +1,26 @@
-.env
-bot.log
+# Python
 __pycache__/
-*.enc
+*.pyc
+
+# Virtual environment
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Session files (never commit these — they contain your tokens!)
+*.session
+*.session-journal
+
+# Bot database and logs
+*.db
+*.log
+
+# Temp files
 temp_*
